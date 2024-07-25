@@ -4,7 +4,7 @@ git clone https://github.com/XargonWan/RetroDECK --depth=1 RetroDECK
 
 # Creating module manifest
 manifest_header="manifest-header.yml"
-manifest_modules="manifest_modules.yml"
+manifest_modules="manifest-modules.yml"
 full_manifest="net.retrodeck.module.yml"
 command="module" 
 
