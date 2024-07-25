@@ -29,10 +29,10 @@ jobs:
         run: "automation_tools/install_dependencies.sh"
 
       - name: "Creating manifest manifest"
-        run: "/bin/bash ${GITHUB_WORKSPACE}/automation_tools/update_manifest_manifest.sh"
+        run: "/bin/bash ${GITHUB_WORKSPACE}/automation_tools/update_manifest.sh"
 
       - name: "[DEBUG] Outputting manifest"
-        run: cat net.retrodeck.manifest.yml
+        run: cat net.retrodeck.module.yml
 
       - name: "Build flatpak"
         id: "flatpak-download"
@@ -40,9 +40,9 @@ jobs:
           flatpak-builder --user --force-clean \
             --install-deps-from=flathub \
             --install-deps-from=flathub-beta \
-            --repo=${GITHUB_WORKSPACE}/manifest-repo \
-            "${GITHUB_WORKSPACE}"/manifest-build-dir \
-            net.retrodeck.manifest.yml
+            --repo=${GITHUB_WORKSPACE}/module-repo \
+            "${GITHUB_WORKSPACE}"/module-build-dir \
+            net.retrodeck.module.yml
 
       - name: "Exporting dir tree"
         id: tree
@@ -50,8 +50,8 @@ jobs:
 
       - name: Create Artifact for RetroDECK
         run: | 
-          tar -czf ${GITHUB_WORKSPACE}/RetroDECK-manifest-Artifact.tar.gz -C ${GITHUB_WORKSPACE}/manifest-build-dir .
-          hash=($(sha256sum ${GITHUB_WORKSPACE}/RetroDECK-manifest-Artifact.tar.gz))
+          tar -czf ${GITHUB_WORKSPACE}/RetroDECK-module-Artifact.tar.gz -C ${GITHUB_WORKSPACE}/manifest-build-dir .
+          hash=($(sha256sum ${GITHUB_WORKSPACE}/RetroDECK-module-Artifact.tar.gz))
           echo $hash > ${GITHUB_WORKSPACE}/RetroDECK-Artifact-cooker.sha
           mv -f RetroDECK-Artifact-cooker.* ${{ secrets.ARTIFACT_REPO }}
         continue-on-error: true
@@ -74,10 +74,10 @@ jobs:
           tag: "${{env.BRANCH_NAME}}-${{env.DATE}}"
           body: |
             # Release Notes
-            These are the artifact of RetroDECK manifest, commit: ${{ github.event.repository.full_name }}@${{github.sha}}.
+            These are the artifact of this RetroDECK module, commit: ${{ github.event.repository.full_name }}@${{github.sha}}.
             On branch [${{env.BRANCH_NAME}}](https://github.com/XargonWan/RetroDECK-manifest/tree/${{env.BRANCH_NAME}}).
 
-          artifacts: "RetroDECK-manifest-Artifact.tar.gz, tree.html"
+          artifacts: "RetroDECK-module-Artifact.tar.gz, tree.html"
           allowUpdates: true
           makeLatest: true
           token: ${{ secrets.TRIGGER_BUILD_TOKEN }}
