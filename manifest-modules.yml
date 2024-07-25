@@ -3,9 +3,9 @@ modules:
   - name: module
     buildsystem: simple
     build-commands:
-      - touch "${FLATPAK_DEST}/bin/module"
+      - mkdir -p "${FLATPAK_DEST}/bin"
       - echo 'echo hello_world' > "${FLATPAK_DEST}/bin/module"
-      - ls -lah /app/bin
+      - ls -lah "${FLATPAK_DEST}/bin"
       - chmod +x "${FLATPAK_DEST}/bin/module"
 
   
