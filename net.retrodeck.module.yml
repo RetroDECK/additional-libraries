@@ -36,3 +36,14 @@ finish-args:
   # PPSSPP, DOLPHIN
   - --filesystem=xdg-run/gamescope-0:ro
 
+modules:
+
+  - name: module
+    buildsystem: simple
+    build-commands:
+      - mkdir -p "${FLATPAK_DEST}/bin"
+      - echo 'echo hello_world' > "${FLATPAK_DEST}/bin/module"
+      - ls -lah "${FLATPAK_DEST}/bin"
+      - chmod +x "${FLATPAK_DEST}/bin/module"
+
+  

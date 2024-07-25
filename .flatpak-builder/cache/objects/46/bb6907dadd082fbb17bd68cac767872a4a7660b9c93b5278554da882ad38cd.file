@@ -1,0 +1,49 @@
+{
+  "id" : "net.retrodeck.module",
+  "runtime" : "org.kde.Platform",
+  "runtime-version" : "6.7",
+  "runtime-commit" : "97b849081abecba33176b3ec125db42a0cbf2bab286fc6e9cebfa68327c9ec27",
+  "sdk" : "org.kde.Sdk",
+  "sdk-commit" : "b9cf038eaf7a038a1443b178bf8bc152360b5c346fdcd9515da62dcbfbe8114a",
+  "command" : "module",
+  "modules" : [
+    {
+      "name" : "module",
+      "buildsystem" : "simple",
+      "build-commands" : [
+        "mkdir -p \"${FLATPAK_DEST}/bin\"",
+        "echo 'echo hello_world' > \"${FLATPAK_DEST}/bin/module\"",
+        "ls -lah \"${FLATPAK_DEST}/bin\"",
+        "chmod +x \"${FLATPAK_DEST}/bin/module\""
+      ]
+    }
+  ],
+  "sdk-extensions" : [
+    "org.freedesktop.Sdk.Extension.llvm18"
+  ],
+  "finish-args" : [
+    "--socket=wayland",
+    "--socket=x11",
+    "--socket=pulseaudio",
+    "--share=ipc",
+    "--share=network",
+    "--device=all",
+    "--filesystem=host",
+    "--filesystem=home/.var/app/com.valvesoftware.Steam",
+    "--allow=multiarch",
+    "--talk-name=org.freedesktop.ScreenSaver",
+    "--talk-name=org.freedesktop.PowerManagement.Inhibit",
+    "--talk-name=org.freedesktop.login1.Manager",
+    "--filesystem=xdg-run/app/com.discordapp.Discord:create",
+    "--filesystem=xdg-config/gtk-3.0:ro",
+    "--env=QT_QPA_PLATFORM=wayland;wayland-egl;xcb",
+    "--allow=bluetooth",
+    "--env=SDL_VIDEO_X11_WMCLASS=net.retrodeck.module",
+    "--env=SDL_VIDEO_WAYLAND_WMCLASS=net.retrodeck.module",
+    "--unset-env=QEMU_AUDIO_DRV",
+    "--filesystem=xdg-data/Steam:rw",
+    "--filesystem=~/.steam:rw",
+    "--filesystem=~/.var/app/com.valvesoftware.Steam:rw",
+    "--filesystem=xdg-run/gamescope-0:ro"
+  ]
+}
