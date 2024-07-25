@@ -1,9 +1,10 @@
 modules:
 
   - name: module
-    build-system: simple
+    buildsystem: simple
     build-commands:
       - echo 'echo hello_world' > "${FLATPAK_DEST}/bin/module"
+      - ls -lah /app/bin
       - chmod +x "${FLATPAK_DEST}/bin/module"
 
   
