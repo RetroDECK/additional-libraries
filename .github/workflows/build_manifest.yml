@@ -28,7 +28,7 @@ jobs:
       - name: "Install dependencies"
         run: "automation_tools/install_dependencies.sh"
 
-      - name: "Creating manifest manifest"
+      - name: "Creating manifest"
         run: "/bin/bash ${GITHUB_WORKSPACE}/automation_tools/update_manifest.sh"
 
       - name: "[DEBUG] Outputting manifest"
