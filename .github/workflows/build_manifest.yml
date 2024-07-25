@@ -10,7 +10,7 @@ on:
 jobs:
 
   Building_RetroDECK-manifest:
-    runs-on: manifest
+    runs-on: retrodeck
     #runs-on: ubuntu-latest
     steps:
 
